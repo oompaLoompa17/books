@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+</head>
+<body>
+    <h1 th:text="${book.title}"></h1>
+    <p><strong>Author:</strong> <span th:text="${book.author}"></span></p>
+    <p><strong>Publisher:</strong> <span th:text="${book.publisher}"></span></p>
+    <p><strong>Year Published:</strong> <span th:text="${book.yearPublished}"></span></p>
+    <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 200px;" />
+    <br />
+
+    <button onclick="addToRead('${book.id}')">Add to 'To Read'</button>
+    <a href="/search">Back to Search</a>
+
+    <script src="/js/app.js">
+        function addToRead(bookId) {
+            fetch(`/books/to-read/${bookId}`, {
+                method: 'POST',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else if (response.status === 409) {
+                        throw new Error("Book is already in your 'To Read' or 'Read' list.");
+                    } else {
+                        throw new Error('An error occurred while adding the book.');
+                    }
+                })
+                .then(message => {
+                    alert(message); // Display success message
+                })
+                .catch(error => {
+                    alert(error.message); // Display error message
+                });
+        }
+    </script>
+</body>
+</html>

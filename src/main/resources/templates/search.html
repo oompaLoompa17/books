@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <script src="/js/app.js">
+        function addToRead(bookId) {
+            fetch(`/books/to-read/${bookId}`, {
+                method: 'POST',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else if (response.status === 409) {
+                        throw new Error("Book is already in your 'To Read' or 'Read' list.");
+                    } else {
+                        throw new Error('An error occurred while adding the book.');
+                    }
+                })
+                .then(message => {
+                    alert(message); // Display success message
+                })
+                .catch(error => {
+                    alert(error.message); // Display error message
+                });
+        }
+    </script>
+</head>
+<body>
+    <p>Showing top 30 results for your search.</p>
+    <ul>
+        <li th:each="book : ${books}">
+            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
+            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a> <!-- Book title links to details -->
+            by <span th:text="${book.author}"></span>
+            <button onclick="addToRead('${book.id}')">Add to 'To Read'</button>
+        </li>
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

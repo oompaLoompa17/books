@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="/js/app.js"></script>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${user.id}"></span></h1>
+
+    <!-- Search Bar -->
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for books" required />
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>To Read List</h2>
+    <ul>
+        <li th:each="book : ${user.toReadList}">
+            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
+            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a>
+            by <span th:text="${book.author}"></span>
+            <button onclick="markAsRead('${book.id}')">Finished Reading</button>
+        </li>
+    </ul>
+
+    <h2>Read List</h2>
+    <ul>
+        <li th:each="book : ${user.readList}">
+            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
+            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a>
+            by <span th:text="${book.author}"></span>
+            <p>Rating: <span th:text="${book.rating}"></span>/5</p>
+            <p>Review: <span th:text="${book.review}"></span></p>
+            <p>Date Read: <span th:text="${book.dateRead}"></span></p>
+        </li>
+    </ul>
+</body>
+</html>
