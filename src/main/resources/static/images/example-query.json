@@ -1,0 +1,264 @@
+{
+    "author_alternative_name": [
+      "William Watterson",
+      "William Boyd Watterson II"
+    ],
+    "author_key": [
+      "OL461054A"
+    ],
+    "author_name": [
+      "Bill Watterson"
+    ],
+    "cover_edition_key": "OL1749959M",
+    "cover_i": 636164,
+    "ddc": [
+      "741",
+      "741.5973"
+    ],
+    "ebook_access": "borrowable",
+    "ebook_count_i": 2,
+    "edition_count": 13,
+    "edition_key": [
+      "OL33523784M",
+      "OL43070985M",
+      "OL25954806M",
+      "OL24629791M",
+      "OL35485576M",
+      "OL7541466M",
+      "OL18570832M",
+      "OL1749959M",
+      "OL33542044M",
+      "OL38344911M",
+      "OL35495203M",
+      "OL35485579M",
+      "OL25886284M"
+    ],
+    "first_publish_year": 1992,
+    "format": [
+      "Hardcover",
+      "Paperback"
+    ],
+    "has_fulltext": true,
+    "ia": [
+      "indispensablecal00watt",
+      "indispensablecal00watt_0"
+    ],
+    "ia_collection": [
+      "americana",
+      "inlibrary",
+      "internetarchivebooks",
+      "openlibrary-d-ol",
+      "printdisabled",
+      "stmaryscountylibrary"
+    ],
+    "ia_collection_s": "americana;inlibrary;internetarchivebooks;openlibrary-d-ol;printdisabled;stmaryscountylibrary",
+    "isbn": [
+      "0836217039",
+      "9780606094672",
+      "0751500283",
+      "0590471791",
+      "9781449472351",
+      "9780590471794",
+      "0751599808",
+      "1449458203",
+      "9781449458201",
+      "9780836218985",
+      "9780751500288",
+      "9780836217032",
+      "9781417775590",
+      "0606094679",
+      "9780751599824",
+      "1449472354",
+      "0836218981",
+      "9780751599800",
+      "9781449458096",
+      "9781449458195",
+      "144945819X",
+      "0751599824",
+      "1417775599",
+      "1449458092"
+    ],
+    "key": "/works/OL3004215W",
+    "language": [
+      "eng"
+    ],
+    "last_modified_i": 1699485467,
+    "lcc": [
+      "PN-6728.00000000.C34 W3855 1992"
+    ],
+    "lccn": [
+      "92072248"
+    ],
+    "lending_edition_s": "OL24629791M",
+    "lending_identifier_s": "indispensablecal00watt",
+    "number_of_pages_median": 255,
+    "oclc": [
+      "34018406"
+    ],
+    "printdisabled_s": "OL24629791M;OL1749959M",
+    "public_scan_b": false,
+    "publish_date": [
+      "1992-10-01",
+      "1992",
+      "2013",
+      "1993"
+    ],
+    "publish_place": [
+      "Kansas City, MO, USA",
+      "Kansas City",
+      "New York",
+      "London, UK"
+    ],
+    "publish_year": [
+      1992,
+      1993,
+      2013
+    ],
+    "publisher": [
+      "Demco Media",
+      "Andrews McMeel Publishing",
+      "YOCEHOMI",
+      "Andrews McMeel",
+      "Turtleback Books",
+      "Scholastic",
+      "Scholastic Inc.",
+      "Andrews and McMeel",
+      "Little, Brown Book Group Limited",
+      "Andrews McMeel Pub",
+      "Warner Books"
+    ],
+    "seed": [
+      "/books/OL33523784M",
+      "/books/OL43070985M",
+      "/books/OL25954806M",
+      "/books/OL24629791M",
+      "/books/OL35485576M",
+      "/books/OL7541466M",
+      "/books/OL18570832M",
+      "/books/OL1749959M",
+      "/books/OL33542044M",
+      "/books/OL38344911M",
+      "/books/OL35495203M",
+      "/books/OL35485579M",
+      "/books/OL25886284M",
+      "/works/OL3004215W",
+      "/authors/OL461054A",
+      "/subjects/stuffed_animals_(toys)",
+      "/subjects/families",
+      "/subjects/imaginary_companions",
+      "/subjects/comic_books_strips",
+      "/subjects/tiger",
+      "/subjects/boys",
+      "/subjects/calvin_(fictitious_character_:_watterson)",
+      "/subjects/calvin_and_hobbes_(comic_strip)",
+      "/subjects/hobbes_(fictitious_character)",
+      "/subjects/pictorial_american_wit_and_humor",
+      "/subjects/children",
+      "/subjects/comic_books_strips_etc.",
+      "/subjects/humor_form_comic_strips_&_cartoons",
+      "/subjects/place:united_states"
+    ],
+    "subtitle": "A Calvin and Hobbes treasury",
+    "title": "The Indispensable Calvin and Hobbes",
+    "title_suggest": "The Indispensable Calvin and Hobbes",
+    "title_sort": "The Indispensable Calvin and Hobbes",
+    "type": "work",
+    "id_goodreads": [
+      "121796",
+      "24815",
+      "297839"
+    ],
+    "id_librarything": [
+      "24457",
+      "24457",
+      "24457"
+    ],
+    "subject": [
+      "Stuffed animals (Toys)",
+      "Families",
+      "Imaginary companions",
+      "Comic books, strips",
+      "Tiger",
+      "Boys",
+      "Calvin (Fictitious character : Watterson)",
+      "Calvin and Hobbes (Comic strip)",
+      "Hobbes (Fictitious character)",
+      "Pictorial American wit and humor",
+      "Children",
+      "Comic books, strips, etc.",
+      "Humor, form, comic strips & cartoons"
+    ],
+    "place": [
+      "United States"
+    ],
+    "ia_box_id": [
+      "IA138301"
+    ],
+    "ratings_count_1": 0,
+    "ratings_count_2": 1,
+    "ratings_count_3": 1,
+    "ratings_count_4": 5,
+    "ratings_count_5": 14,
+    "ratings_average": 4.5238094,
+    "ratings_sortable": 3.875116,
+    "ratings_count": 21,
+    "readinglog_count": 125,
+    "want_to_read_count": 91,
+    "currently_reading_count": 9,
+    "already_read_count": 25,
+    "publisher_facet": [
+      "Andrews McMeel",
+      "Andrews McMeel Pub",
+      "Andrews McMeel Publishing",
+      "Andrews and McMeel",
+      "Demco Media",
+      "Little, Brown Book Group Limited",
+      "Scholastic",
+      "Scholastic Inc.",
+      "Turtleback Books",
+      "Warner Books",
+      "YOCEHOMI"
+    ],
+    "place_key": [
+      "united_states"
+    ],
+    "subject_facet": [
+      "Boys",
+      "Calvin (Fictitious character : Watterson)",
+      "Calvin and Hobbes (Comic strip)",
+      "Children",
+      "Comic books, strips",
+      "Comic books, strips, etc.",
+      "Families",
+      "Hobbes (Fictitious character)",
+      "Humor, form, comic strips & cartoons",
+      "Imaginary companions",
+      "Pictorial American wit and humor",
+      "Stuffed animals (Toys)",
+      "Tiger"
+    ],
+    "_version_": 1795899103015600128,
+    "place_facet": [
+      "United States"
+    ],
+    "lcc_sort": "PN-6728.00000000.C34 W3855 1992",
+    "author_facet": [
+      "OL461054A Bill Watterson"
+    ],
+    "subject_key": [
+      "boys",
+      "calvin_(fictitious_character__watterson)",
+      "calvin_and_hobbes_(comic_strip)",
+      "children",
+      "comic_books_strips",
+      "comic_books_strips_etc.",
+      "families",
+      "hobbes_(fictitious_character)",
+      "humor_form_comic_strips__cartoons",
+      "imaginary_companions",
+      "pictorial_american_wit_and_humor",
+      "stuffed_animals_(toys)",
+      "tiger"
+    ],
+    "ddc_sort": "741.5973"
+  }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Account with Us!</h1>
+        <form th:action="@{/register}" th:object="${user}" method="post" class="register-form">
+            <div class="form-group">
+                <label for="id">Email:</label>
+                <input type="email" id="id" name="id" th:value="*{id}" required>
+                <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" th:value="*{id}" required>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <a th:href="@{/}">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -4,39 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1 th:text="${book.title}"></h1>
-    <p><strong>Author:</strong> <span th:text="${book.author}"></span></p>
-    <p><strong>Publisher:</strong> <span th:text="${book.publisher}"></span></p>
-    <p><strong>Year Published:</strong> <span th:text="${book.yearPublished}"></span></p>
-    <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 200px;" />
-    <br />
+    <!-- Search Bar -->
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for books" required />
+        <button type="submit">Search Again!</button>
+    </form>
+    <div class="container">
+        <h1 th:text="${book.title}"></h1>
+        <p><strong>Author:</strong> <span th:text="${book.author}">Unknown Author</span></p>
+        <p><strong>Year Published:</strong> <span th:text="${book.yearPublished}">Unknown</span></p>
+        <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 200px;" />
+        <br>
+        <p><strong>Description:</strong></p>
+        <p th:text="${book.description}">No description available.</p>
 
-    <button onclick="addToRead('${book.id}')">Add to 'To Read'</button>
-    <a href="/search">Back to Search</a>
+        <!-- Feedback area -->
+        <p id="feedback" style="display:none;"></p>
 
-    <script src="/js/app.js">
-        function addToRead(bookId) {
-            fetch(`/books/to-read/${bookId}`, {
-                method: 'POST',
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    } else if (response.status === 409) {
-                        throw new Error("Book is already in your 'To Read' or 'Read' list.");
-                    } else {
-                        throw new Error('An error occurred while adding the book.');
-                    }
-                })
-                .then(message => {
-                    alert(message); // Display success message
-                })
-                .catch(error => {
-                    alert(error.message); // Display error message
-                });
-        }
-    </script>
+        <p>
+            <strong>Goodreads:</strong>
+            <a th:href="${book.goodreadsUrl}" target="_blank">See Reviews</a>
+        </p>
+        <!-- Add to "To Read" list button -->
+        <button class="add-to-read" th:attr="data-book-id=${book.id}">
+            Add to 'To Read'
+        </button>
+        <br><br>
+    </div>
+    <div class="top-buttons">
+        <a th:href="@{/dashboard}" class="dashboard-button">Dashboard</a>
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+    </div>
+    <script src="/js/app.js"></script>
 </body>
 </html>

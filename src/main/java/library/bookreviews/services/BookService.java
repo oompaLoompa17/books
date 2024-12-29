@@ -42,27 +42,58 @@ public class BookService {
     }
 
     /**
-     * Fetches detailed metadata about a specific book using its ID.
+     * Fetches or enriches metadata about a specific book using its ID.
      * Data is cached in Redis for faster access in future requests.
-     * 
-     * @param bookId The unique ID of the book.
-     * @return The detailed metadata of the book.
+     *
+     * @param bookId The unique ID of the book (e.g. "OL41495W").
+     * @return The Book object with all known fields, including description & subjects.
      */
     public Book getBookDetails(String bookId) {
-        // Check the cache for the book details
+
+        // 1) Check the cache
         Book cachedBook = bookRepository.findBookById(bookId);
         if (cachedBook != null) {
+            // If we already have a description, assume it's fully enriched
+            if (cachedBook.getDescription() != null && !cachedBook.getDescription().equals("No description available.")) {
+                System.out.printf(">>>> you are here: cached book w description.\n book-> %s", cachedBook);
+                return cachedBook;
+            }
+            // Otherwise, it's partial => fill in missing fields
+            openLibraryApiClient.fillDescription(cachedBook);
+            bookRepository.saveBook(cachedBook);
             return cachedBook;
         }
 
-        // If no cache exists, fetch details from the Open Library API
-        Book book = openLibraryApiClient.getBookDetails(bookId);
+        // 2) If not in cache, fetch partial data from the search API
+        Book partialBook = fetchPartialBook(bookId);
+        if (partialBook == null) {
+            throw new RuntimeException("Could not fetch partial book details for ID: " + bookId);
+        }
 
-        // Cache the book details in Redis
-        bookRepository.saveBook(book);
+        // 3) Enrich the book with description and subjects
+        openLibraryApiClient.fillDescription(partialBook);
+        System.out.printf(">>>> you are here: partial book filled in.\n book-> %s", partialBook);
 
-        // Return the book details
-        return book;
+        // 4) Save enriched Book to Redis
+        bookRepository.saveBook(partialBook);
+
+        // 5) Return the enriched Book
+        return partialBook;
+    }
+
+    private Book fetchPartialBook(String bookId) {
+        // Use the search endpoint to find a partial book
+        List<Book> books = openLibraryApiClient.searchBooks(bookId);
+    
+        // Match by ID
+        for (Book book : books) {
+            if (bookId.equals(book.getId())) {
+                return book;
+            }
+        }
+    
+        // If no match is found, return null
+        return null;
     }
 
 }

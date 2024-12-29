@@ -4,39 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
-    <script src="/js/app.js">
-        function addToRead(bookId) {
-            fetch(`/books/to-read/${bookId}`, {
-                method: 'POST',
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    } else if (response.status === 409) {
-                        throw new Error("Book is already in your 'To Read' or 'Read' list.");
-                    } else {
-                        throw new Error('An error occurred while adding the book.');
-                    }
-                })
-                .then(message => {
-                    alert(message); // Display success message
-                })
-                .catch(error => {
-                    alert(error.message); // Display error message
-                });
-        }
-    </script>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <p>Showing top 30 results for your search.</p>
-    <ul>
-        <li th:each="book : ${books}">
-            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
-            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a> <!-- Book title links to details -->
-            by <span th:text="${book.author}"></span>
-            <button onclick="addToRead('${book.id}')">Add to 'To Read'</button>
-        </li>
-    </ul>
-    <a href="/dashboard">Back to Dashboard</a>
+    <div class="container">
+        <!-- Search Bar -->
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search for books" required />
+            <button type="submit">Keyword Search!</button>
+        </form>
+        <h1>You searched for: <span th:text="${query}"></span></h1>
+        <div class="search-results">
+            <div class="search-item" th:each="book : ${books}">
+                <img th:src="${book.imageUrl}" alt="Book Cover" />
+                <p><a th:href="@{/books/{id}(id=${book.id}, query=${query})}" th:text="${book.title}">Book Title</a></p>
+                <p th:text="'by ' + ${book.author}">Author</p>
+                <button class="add-to-read" th:attr="data-book-id=${book.id}">Add to 'To Read'</button>
+                <!-- <p class="feedback-message" data-book-id="${book.id}" style="display:none;"></p> -->
+                <p class="feedback-message" th:attr="data-book-id=${book.id}" style="display:none;"></p>
+            </div>
+        </div>
+        <div class="top-buttons">
+            <a th:href="@{/dashboard}" class="dashboard-button">Dashboard</a>
+            <a th:href="@{/logout}" class="logout-button">Logout</a>
+        </div>
+    </div>    
+    <script src="/js/app.js">
+
+    </script>
+    
 </body>
 </html>

@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark as Read</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+     <!-- Search Bar -->
+     <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for books" required />
+        <button type="submit">Search for books to add to your list!</button>
+    </form>
     <h1>Mark Book as Read</h1>
     <form method="POST" action="/mark-as-read">
         <input type="hidden" name="bookId" th:value="${book.id}" />
@@ -17,5 +23,9 @@
         <input type="date" name="dateRead" required />
         <button type="submit">Save</button>
     </form>
+    <p>
+        <a th:href="@{/dashboard}" class="button">Back to Dashboard</a>
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+    </p>
 </body>
 </html>

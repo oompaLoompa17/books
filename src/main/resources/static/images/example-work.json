@@ -1,0 +1,63 @@
+{
+    "subtitle": "A Calvin and Hobbes treasury",
+    "description": {
+      "type": "/type/text",
+      "value": "Includes cartoons from *The Revenge of the Baby-Sat* and *Scientific Progress Goes \"Boink\"*"
+    },
+    "title": "The Indispensable Calvin and Hobbes",
+    "lc_classifications": [
+      "PN6728.C34 W3855 1992"
+    ],
+    "covers": [
+      636164,
+      6874913,
+      7454281,
+      13880655
+    ],
+    "subject_places": [
+      "United States"
+    ],
+    "first_publish_date": "1992",
+    "key": "/works/OL3004215W",
+    "authors": [
+      {
+        "type": {
+          "key": "/type/author_role"
+        },
+        "author": {
+          "key": "/authors/OL461054A"
+        }
+      }
+    ],
+    "dewey_number": [
+      "741.5973"
+    ],
+    "type": {
+      "key": "/type/work"
+    },
+    "subjects": [
+      "Stuffed animals (Toys)",
+      "Families",
+      "Imaginary companions",
+      "Comic books, strips",
+      "Tiger",
+      "Boys",
+      "Calvin (Fictitious character : Watterson)",
+      "Calvin and Hobbes (Comic strip)",
+      "Hobbes (Fictitious character)",
+      "Pictorial American wit and humor",
+      "Children",
+      "Comic books, strips, etc.",
+      "Humor, form, comic strips & cartoons"
+    ],
+    "latest_revision": 14,
+    "revision": 14,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2009-12-10T01:27:58.027687"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-09-08T19:32:21.609089"
+    }
+  }

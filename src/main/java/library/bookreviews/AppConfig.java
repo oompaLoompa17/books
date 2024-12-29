@@ -12,6 +12,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+
 @Configuration
 public class AppConfig {
 
@@ -55,6 +59,13 @@ public class AppConfig {
       JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
       jedisFac.afterPropertiesSet();
 
+      // Create a custom ObjectMapper using JsonMapper.builder
+      ObjectMapper objectMapper = JsonMapper.builder()
+               .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, 
+                                       ObjectMapper.DefaultTyping.NON_FINAL)
+               .findAndAddModules() // Adds support for Java 8 Date/Time and other modules
+               .build();
+
       // Create the RedisTemplate
       RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
       redisTemplate.setConnectionFactory(jedisFac);
@@ -62,11 +73,8 @@ public class AppConfig {
       // Configure serializers
       redisTemplate.setKeySerializer(new StringRedisSerializer());
       redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-
-      // Use GenericJackson2JsonRedisSerializer for values
-      GenericJackson2JsonRedisSerializer jsonSerializer = new GenericJackson2JsonRedisSerializer();
-      redisTemplate.setValueSerializer(jsonSerializer);
-      redisTemplate.setHashValueSerializer(jsonSerializer);
+      redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
+      redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer(objectMapper));
 
       redisTemplate.afterPropertiesSet();
       return redisTemplate;

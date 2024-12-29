@@ -5,36 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+
 </head>
 <body>
     <h1>Welcome, <span th:text="${user.id}"></span></h1>
-
     <!-- Search Bar -->
     <form action="/search" method="GET">
         <input type="text" name="query" placeholder="Search for books" required />
-        <button type="submit">Search</button>
+        <button type="submit">Keyword Search!</button>
     </form>
+    <!-- Table for Unread Books -->
+    <h2>To Read:</h2>
+    <div th:if="${toReadList.size() == 0}">
+        <p>You have no books in your "To Read" list.</p>
+    </div>
+    <div th:if="${toReadList.size() > 0}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book Cover</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year Published</th>
+                    <th></th>
+                    <th></th>
+                    <th>Mark as Read</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${toReadList}">
+                    <td><img th:src="${book.imageUrl}" alt="Book Cover" style="width: 100px;"></td>
+                    <td>
+                        <a th:href="@{/books/{id}(id=${book.id})}" 
+                        th:title="${book.description}"  
+                        th:text="${book.title}">Book Title</a>
+                    </td>
+                    <td th:text="${book.author}">Author</td>
+                    <td th:text="${book.yearPublished}">Year</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <form action="/books/mark-as-read" method="GET" style="display: inline;">
+                            <input type="hidden" name="bookId" th:value="${book.id}" />
+                            <button type="submit">Mark as Read</button>
+                        </form>
+                    </td>               
+                    <td>
+                        <button class="remove-from-read" th:attr="data-book-id=${book.id}">Remove</button>
+                    </td>     
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <h2>To Read List</h2>
-    <ul>
-        <li th:each="book : ${user.toReadList}">
-            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
-            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a>
-            by <span th:text="${book.author}"></span>
-            <button onclick="markAsRead('${book.id}')">Finished Reading</button>
-        </li>
-    </ul>
-
-    <h2>Read List</h2>
-    <ul>
-        <li th:each="book : ${user.readList}">
-            <img th:src="${book.imageUrl}" alt="Book Cover" style="width: 50px;" />
-            <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}"></a>
-            by <span th:text="${book.author}"></span>
-            <p>Rating: <span th:text="${book.rating}"></span>/5</p>
-            <p>Review: <span th:text="${book.review}"></span></p>
-            <p>Date Read: <span th:text="${book.dateRead}"></span></p>
-        </li>
-    </ul>
+    <!-- Table for Read Books -->
+    <h2>Finished Books:</h2>
+    <div th:if="${readList.size() == 0}">
+        <p>You have no books in your "Read" list.</p>
+    </div>
+    <div th:if="${readList.size() > 0}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book Cover</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Rating</th>
+                    <th>Date Read</th>
+                    <th>Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${readList}">
+                    <td><img th:src="${book.imageUrl}" alt="Book Cover" style="width: 100px;"></td>
+                    <td>
+                        <a th:href="@{/books/{id}(id=${book.id})}" 
+                        th:title="${book.description}"  
+                        th:text="${book.title}">Book Title</a>
+                    </td>
+                    <td th:text="${book.author}">Author</td>
+                    <td th:text="${book.rating}">Rating</td>
+                    <td th:text="${book.dateRead}">Date</td>
+                    <td th:text="${book.review}">Review</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="top-buttons">
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+    </div>
 </body>
 </html>

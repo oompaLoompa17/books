@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Search Bar -->
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for books" required />
+        <button type="submit">Keyword Search!</button>
+    </form>
+    <div class="error-container">
+        <h1>Something went wrong</h1>
+        <p>We're sorry, but an unexpected error occurred.</p>
+
+        <!-- Display error details if available -->
+        <p th:if="${timestamp}"><strong>Timestamp:</strong> <span th:text="${timestamp}"></span></p>
+        <p th:if="${status}"><strong>Status:</strong> <span th:text="${status}"></span></p>
+        <p th:if="${error}"><strong>Error:</strong> <span th:text="${error}"></span></p>
+        <p th:if="${message}"><strong>Message:</strong> <span th:text="${message}"></span></p>
+        <p th:if="${path}"><strong>Path:</strong> <span th:text="${path}"></span></p>
+
+        <a href="/" class="btn">Go Back to Home</a>
+    </div>
+    <div class="top-buttons">
+        <a th:href="@{/dashboard}" class="dashboard-button">Dashboard</a>
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>
