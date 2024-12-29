@@ -1,36 +1,3 @@
-// function addToRead(bookId) {
-//     console.log("Adding Book ID to Read List: ", bookId); // Debugging log
-//     fetch(`/books/to-read/${bookId}`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.text();
-//             } else if (response.status === 409) {
-//                 throw new Error("Book is already in your 'To Read' or 'Read' list.");
-//             } else if (response.status === 401) {
-//                 throw new Error("You must be logged in to add books.");
-//             } else {
-//                 throw new Error('An error occurred while adding the book.');
-//             }
-//         })
-//         .then(message => {
-//             const feedback = document.getElementById('feedback');
-//             feedback.style.color = 'green';
-//             feedback.style.display = 'block';
-//             feedback.textContent = message;
-//         })
-//         .catch(error => {
-//             const feedback = document.getElementById('feedback');
-//             feedback.style.color = 'red';
-//             feedback.style.display = 'block';
-//             feedback.textContent = error.message;
-//         });
-// }
-
 function addToRead(bookId) {
     fetch(`/books/to-read/${bookId}`, {
         method: 'POST',
@@ -82,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
 
 
 function markAsRead(bookId) {

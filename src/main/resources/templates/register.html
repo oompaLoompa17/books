@@ -19,6 +19,9 @@
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
             <button type="submit">Register</button>
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
         </form>
         <a th:href="@{/}">Back to Home</a>
     </div>

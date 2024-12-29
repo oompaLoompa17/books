@@ -18,11 +18,11 @@ public class BookService {
     private OpenLibraryApiClient openLibraryApiClient;
 
     /**
-     * Searches for books using the Open Library API. 
-     * Results are cached in Redis for subsequent searches.
+     * Searches for books using the Open Library API
+     * Results are cached in Redis for subsequent searches
      * 
-     * @param query The search query (title or author).
-     * @return A list of books matching the query.
+     * query = search query (title or author)
+     * returns a list of books matching the query
      */
     public List<Book> searchBooks(String query) {
         // Check the cache for previous search results
@@ -42,11 +42,11 @@ public class BookService {
     }
 
     /**
-     * Fetches or enriches metadata about a specific book using its ID.
-     * Data is cached in Redis for faster access in future requests.
+     * Fetches or enriches metadata about a specific book using its ID
+     * Data is cached in Redis for faster access in future requests
      *
-     * @param bookId The unique ID of the book (e.g. "OL41495W").
-     * @return The Book object with all known fields, including description & subjects.
+     * bookId = unique ID of the book (e.g. "OL41495W")
+     * returns the Book object with all known fields, now including description
      */
     public Book getBookDetails(String bookId) {
 
@@ -55,10 +55,9 @@ public class BookService {
         if (cachedBook != null) {
             // If we already have a description, assume it's fully enriched
             if (cachedBook.getDescription() != null && !cachedBook.getDescription().equals("No description available.")) {
-                System.out.printf(">>>> you are here: cached book w description.\n book-> %s", cachedBook);
                 return cachedBook;
             }
-            // Otherwise, it's partial => fill in missing fields
+            // Otherwise, it's partial => fill in missing description
             openLibraryApiClient.fillDescription(cachedBook);
             bookRepository.saveBook(cachedBook);
             return cachedBook;
@@ -72,7 +71,6 @@ public class BookService {
 
         // 3) Enrich the book with description and subjects
         openLibraryApiClient.fillDescription(partialBook);
-        System.out.printf(">>>> you are here: partial book filled in.\n book-> %s", partialBook);
 
         // 4) Save enriched Book to Redis
         bookRepository.saveBook(partialBook);

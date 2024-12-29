@@ -25,7 +25,7 @@ public class UserRepository {
     public User findById(String userId) {
         String userKey = USER_PREFIX + userId;
 
-        User user = new User();
+        User user = new User(); // instantiate and initialize a new user object from the match found in Redis
         user.setId(userId);
         user.setPassword((String) redisTemplate.opsForHash().get(userKey, "password"));
         
@@ -50,7 +50,7 @@ public class UserRepository {
 
     // Save or update a user
     public void save(User user) {
-        String userKey = USER_PREFIX + user.getId();
+        String userKey = USER_PREFIX + user.getId(); // save over each of the existing hashkey values if they exist
         redisTemplate.opsForHash().put(userKey, "id", user.getId());
         redisTemplate.opsForHash().put(userKey, "password", user.getPassword());
         redisTemplate.opsForHash().put(userKey, "toReadList", user.getToReadList());

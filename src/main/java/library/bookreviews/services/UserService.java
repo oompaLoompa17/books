@@ -38,11 +38,11 @@ public class UserService {
         User user = userRepository.findById(username);
 
         if (user == null || user.getPassword() == null) {
-            throw new IllegalArgumentException("Username does not exist."); // User not found
+            throw new IllegalArgumentException("Username does not exist."); // user not found
         }
 
         if (!user.getPassword().equals(password)) {
-            throw new IllegalArgumentException("Incorrect password."); // Password mismatch
+            throw new IllegalArgumentException("Incorrect password."); // password mismatch
         }
 
         return user; // returns an existing user
@@ -142,21 +142,9 @@ public class UserService {
         return userRepository.findById(userId).getReadList();
     }
 
-    // public User getUserDetails(String userId) {
-    //     User user = userRepository.findById(userId);
-
-    //     if (user == null) {
-    //         throw new IllegalArgumentException("User not found with ID: " + userId + "\n");
-    //     }
-
-    //     return user;
-    // }
-
     public void updateSession(HttpSession session, String userId) {
         User updatedUser = userRepository.findById(userId);
         session.setAttribute("user", updatedUser);
-        System.out.println("Session updated for user: " + updatedUser);
-        System.out.println("Updated session for user: " + session.getAttribute("user")); //debugging
     }
     
 }

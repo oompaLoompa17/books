@@ -22,16 +22,15 @@
         <p th:text="${book.description}">No description available.</p>
 
         <!-- Feedback area -->
-        <p id="feedback" style="display:none;"></p>
+        <!-- <p id="feedback" style="display:none;"></p> -->
 
         <p>
             <strong>Goodreads:</strong>
             <a th:href="${book.goodreadsUrl}" target="_blank">See Reviews</a>
         </p>
         <!-- Add to "To Read" list button -->
-        <button class="add-to-read" th:attr="data-book-id=${book.id}">
-            Add to 'To Read'
-        </button>
+        <button class="add-to-read" th:attr="data-book-id=${book.id}"> Add to 'To Read'</button>
+        <p class="feedback-message" th:attr="data-book-id=${book.id}" style="display:none;"></p>
         <br><br>
     </div>
     <div class="top-buttons">

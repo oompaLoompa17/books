@@ -38,6 +38,7 @@ public class ListController {
         }
     }
 
+    // Remove from "To Read" list
     @PostMapping("/books/remove-to-read/{id}")
     public ResponseEntity<String> removeFromToReadList(@PathVariable String id, HttpSession session) {
         User user = (User) session.getAttribute("user");

@@ -19,6 +19,7 @@ public class OpenLibraryApiClient {
     
     private RestTemplate restTemplate = new RestTemplate();
 
+    // returns a list of books based on query
     public List<Book> searchBooks(String query) {
         String url = BASE_URL + "/search.json?q=" + URLEncoder.encode(query, StandardCharsets.UTF_8)+ "&limit=30";
 
@@ -34,6 +35,7 @@ public class OpenLibraryApiClient {
         return books;
     }
 
+    // pulls out the relevant fields and populates individual book objects
     private Book mapToBook(JsonNode node) {
         Book book = new Book();
         book.setId(node.has("key") ? node.get("key").asText().replace("/works/", "") : null);
@@ -45,7 +47,6 @@ public class OpenLibraryApiClient {
         if (node.has("id_goodreads") 
                 && node.get("id_goodreads").isArray() 
                 && node.get("id_goodreads").size() > 0) {
-
             String firstGoodreadsId = node.get("id_goodreads").get(0).asText();
             String goodreadsUrl = "https://www.goodreads.com/book/show/" + firstGoodreadsId;
             book.setGoodreadsUrl(goodreadsUrl);
@@ -53,52 +54,7 @@ public class OpenLibraryApiClient {
         return book;
     }
 
-    public Book getBookDetails(Book baseBook) {
-        // baseBook already has id, title, author, year, imageUrl from the search doc
-    
-        // We'll retrieve the work details (description, subjects) from the Work endpoint
-        String url = BASE_URL + "/works/" + baseBook.getId() + ".json";
-        // e.g. if baseBook.getId() = "OL41495W", then => "/works/OL41495W.json"
-    
-        try {
-            ResponseEntity<JsonNode> response = restTemplate.getForEntity(url, JsonNode.class);
-            JsonNode workNode = response.getBody();
-    
-            // Enrich 'baseBook' with description + subjects
-            mapToDetailedBook(baseBook, workNode);
-        } catch (Exception ex) {
-            // fallback or log errors
-            System.out.println("Failed to retrieve /works data: " + ex.getMessage());
-        }
-    
-        return baseBook;
-    }
-
-    /**
-     * Fills the given book with extra details from the /works/{workId}.json endpoint:
-     *   - description
-     *   - subjects
-     * Leaves the existing fields (title, author, cover, etc.) alone.
-     */
-    private Book mapToDetailedBook(Book book, JsonNode node) {
-        // 1) Description
-        String description = "No description available.";
-        JsonNode descNode = node.get("description");
-        if (descNode != null) {
-            // If it's a raw string
-            if (descNode.isTextual()) {
-                description = descNode.asText();
-            }
-            // Or if it's an object: "description": {"value":"Some desc"}
-            else if (descNode.has("value") && descNode.get("value").isTextual()) {
-                description = descNode.get("value").asText();
-            }
-        }
-        book.setDescription(description);
-
-        return book;
-    }   
-
+    // adds the description to a book that could not be accessed through the initial 'general' search
     public Book fillDescription(Book book) {
         // 'book.getId()' is something like "OL41495W" (no "/works/")
         String workId = book.getId();
@@ -108,8 +64,7 @@ public class OpenLibraryApiClient {
         try {
             ResponseEntity<JsonNode> response = restTemplate.getForEntity(url, JsonNode.class);
             JsonNode node = response.getBody();
-    
-            // (1) description
+
             String description = "No description available.";
             JsonNode descNode = node.get("description");
             if (descNode != null) {
@@ -128,7 +83,5 @@ public class OpenLibraryApiClient {
     
         return book;
     }
-    
-    
 }
 
